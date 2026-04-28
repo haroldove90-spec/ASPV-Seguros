@@ -730,7 +730,7 @@ const AdminView = () => {
             <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                 <h3 className="font-black text-xs text-blue-900 uppercase tracking-widest flex items-center gap-2">
                     <Zap className="w-4 h-4" />
-                    Gestión de Siniestros
+                    Panel de Siniestros - Admin
                 </h3>
             </div>
             <div className="overflow-x-auto">
@@ -836,7 +836,7 @@ const AdminView = () => {
 // --- Main Application ---
 
 export default function App() {
-  const [role, setRole] = useState<Role>(Role.CLIENT);
+  const [role, setRole] = useState<Role>(Role.ADMIN);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
@@ -879,10 +879,9 @@ export default function App() {
   };
 
   const menuItems = [
-    { id: Role.CLIENT, label: 'Cliente', icon: User },
-    { id: Role.OPERATOR, label: 'Operador', icon: Truck },
+    { id: Role.ADMIN, label: 'Admin', icon: LayoutDashboard },
     { id: Role.ADJUSTER, label: 'Ajustador', icon: FileStack },
-    { id: Role.ADMIN, label: 'Gestión', icon: LayoutDashboard },
+    { id: Role.CLIENT, label: 'Cliente', icon: User },
   ];
 
   return (
