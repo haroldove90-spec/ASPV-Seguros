@@ -1,6 +1,6 @@
 {
-  "name": "Elite Roadside Assistance",
-  "description": "Functional mockup of a premium roadside assistance platform with Client, Operator, and Admin roles.",
+  "name": "ASPV Seguros",
+  "description": "Plataforma de Asistencia y Protección Vial de ASPV Seguros.",
   "requestFramePermissions": [
     "geolocation"
   ],
@@ -8,6 +8,7 @@
     "SPA",
     "Tailwind CSS",
     "Lucide Icons",
-    "Framer Motion"
+    "PWA",
+    "Geolocation API"
   ]
 }
