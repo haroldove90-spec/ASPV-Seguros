@@ -6,22 +6,24 @@
     <title>ASPV Seguros - Asistencia Vial</title>
     
     <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#1e3a8a" />
+    <meta name="theme-color" content="#003366" />
     <meta name="description" content="Asistencia y Protección Vial de ASPV Seguros" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="ASPV Seguros" />
     <link rel="apple-touch-icon" href="https://cossma.com.mx/aspv.png" />
     
-    <!-- Manifest simulation for demo -->
-    <script type="application/json" id="manifest">
-      {
-        "short_name": "ASPV",
-        "name": "ASPV Seguros",
-        "start_url": ".",
-        "display": "standalone",
-        "theme_color": "#1e3a8a",
-        "background_color": "#ffffff"
+    <!-- Real Manifest Link -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('ASPV: Service Worker registrado', reg))
+            .catch(err => console.error('ASPV: Error al registrar SW', err));
+        });
       }
     </script>
   </head>

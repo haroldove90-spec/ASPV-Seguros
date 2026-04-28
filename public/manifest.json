@@ -1,0 +1,33 @@
+{
+  "short_name": "ASPV",
+  "name": "ASPV Seguros - Asistencia Vial",
+  "icons": [
+    {
+      "src": "https://cossma.com.mx/aspv.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cossma.com.mx/aspv.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#003366",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "description": "Plataforma de Asistencia y Protección Vial de ASPV Seguros.",
+  "categories": ["productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "https://cossma.com.mx/aspv.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Vista principal de ASPV Seguros"
+    }
+  ]
+}

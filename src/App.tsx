@@ -421,6 +421,40 @@ const AdminView = () => {
 export default function App() {
   const [role, setRole] = useState<Role>(Role.CLIENT);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [showInstallButton, setShowInstallButton] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: any) => {
+      // Prevenir que el navegador lo muestre automáticamente
+      e.preventDefault();
+      // Guardar el evento para dispararlo luego
+      setDeferredPrompt(e);
+      // Mostrar nuestro propio aviso
+      setShowInstallButton(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    
+    // Mostrar el prompt del navegador
+    deferredPrompt.prompt();
+    
+    // Esperar a que el usuario responda
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`ASPV: Resultado de instalación: ${outcome}`);
+    
+    // Limpiar el estado
+    setDeferredPrompt(null);
+    setShowInstallButton(false);
+  };
 
   const toggleRole = (r: Role) => {
     setRole(r);
@@ -543,6 +577,39 @@ export default function App() {
           {role === Role.CLIENT && <ClientView key="client" />}
           {role === Role.OPERATOR && <OperatorView key="operator" />}
           {role === Role.ADMIN && <AdminView key="admin" />}
+        </AnimatePresence>
+
+        {/* PWA Install Banner */}
+        <AnimatePresence>
+            {showInstallButton && (
+                <motion.div 
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 100, opacity: 0 }}
+                    className="fixed bottom-24 left-4 right-4 z-[70] md:max-w-xs md:left-auto md:right-10"
+                >
+                    <div className="bg-blue-900 border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-white p-2 rounded-lg">
+                                <Car className="w-5 h-5 text-blue-900" />
+                            </div>
+                            <div>
+                                <p className="text-[10px] text-white/60 font-black uppercase tracking-widest">Instalar App</p>
+                                <p className="text-xs font-bold text-white">ASPV en tu inicio</p>
+                            </div>
+                        </div>
+                        <button 
+                            onClick={handleInstallClick}
+                            className="bg-white text-blue-900 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-100"
+                        >
+                            Instalar
+                        </button>
+                        <button onClick={() => setShowInstallButton(false)} className="text-white/40 hover:text-white">
+                            <X className="w-4 h-4" />
+                        </button>
+                    </div>
+                </motion.div>
+            )}
         </AnimatePresence>
       </main>
 
