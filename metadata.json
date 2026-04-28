@@ -1,0 +1,13 @@
+{
+  "name": "Elite Roadside Assistance",
+  "description": "Functional mockup of a premium roadside assistance platform with Client, Operator, and Admin roles.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "SPA",
+    "Tailwind CSS",
+    "Lucide Icons",
+    "Framer Motion"
+  ]
+}
